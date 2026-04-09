@@ -1,0 +1,5 @@
+{
+  "name": "Simulador de Importação Pro",
+  "description": "Calculadora avançada de custos de importação com impostos brasileiros (II, IPI, PIS, COFINS, ICMS) e despesas operacionais.",
+  "requestFramePermissions": []
+}
