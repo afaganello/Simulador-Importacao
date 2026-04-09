@@ -26,10 +26,12 @@ export const DEFAULT_INPUTS: ImportInputs = {
   storageRate: 0.23,
   lifting: 450.00,
   weighing: 250.00,
+  roadFreight: 1800.00,
   otherExpenses: 559.17,
   
   recoverPis: true,
   recoverCofins: true,
   recoverIpi: true,
   recoverIcms: true,
+  recoverRoadFreightTax: true,
 };

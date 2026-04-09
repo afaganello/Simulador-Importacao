@@ -20,11 +20,13 @@ export function calculateImportCosts(inputs: ImportInputs): ImportResults {
     storageRate,
     lifting,
     weighing,
+    roadFreight,
     otherExpenses,
     recoverPis,
     recoverCofins,
     recoverIpi,
     recoverIcms,
+    recoverRoadFreightTax,
   } = inputs;
 
   // Cálculos de Base
@@ -59,7 +61,7 @@ export function calculateImportCosts(inputs: ImportInputs): ImportResults {
   const cofinsValue = cofinsBase * (cofinsRate / 100);
 
   // Despesas Operacionais
-  const totalOperationalExpenses = siscomex + finalAfrmm + finalStorage + thc + blRelease + customsBroker + lifting + weighing + otherExpenses;
+  const totalOperationalExpenses = siscomex + finalAfrmm + finalStorage + thc + blRelease + customsBroker + lifting + weighing + roadFreight + otherExpenses;
 
   // ICMS (Cálculo "por dentro")
   // Base ICMS = (Valor Aduaneiro + II + IPI + PIS + COFINS + Despesas Aduaneiras) / (1 - Alíquota ICMS)
@@ -77,6 +79,13 @@ export function calculateImportCosts(inputs: ImportInputs): ImportResults {
   if (recoverCofins) totalRecoverableTaxes += cofinsValue;
   if (recoverIpi) totalRecoverableTaxes += ipiValue;
   if (recoverIcms) totalRecoverableTaxes += icmsValue;
+
+  // Crédito PIS/COFINS sobre Frete Rodoviário (Lucro Real)
+  if (recoverRoadFreightTax) {
+    // Geralmente 1.65% PIS e 7.6% COFINS, mas usamos as alíquotas informadas para consistência
+    totalRecoverableTaxes += roadFreight * (pisRate / 100);
+    totalRecoverableTaxes += roadFreight * (cofinsRate / 100);
+  }
 
   // Custo Contábil (Líquido)
   const netAccountingCost = totalImportCost - totalRecoverableTaxes;

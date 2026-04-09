@@ -28,6 +28,7 @@ export interface ImportInputs {
   storageRate: number; // Alíquota Armazenagem (%)
   lifting: number; // Levantes
   weighing: number; // Pesagem Container
+  roadFreight: number; // Frete Rodoviário (Porto -> Estoque)
   otherExpenses: number;
   
   // Configurações de Crédito
@@ -35,6 +36,7 @@ export interface ImportInputs {
   recoverCofins: boolean;
   recoverIpi: boolean;
   recoverIcms: boolean;
+  recoverRoadFreightTax: boolean; // Crédito PIS/COFINS sobre Frete Rodoviário
 }
 
 export interface ImportResults {

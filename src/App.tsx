@@ -247,6 +247,7 @@ Total Impostos: ${formatCurrency(results.totalTaxes)}
                   <Checkbox label="COFINS" checked={inputs.recoverCofins} onChange={(v) => handleInputChange('recoverCofins', v)} />
                   <Checkbox label="IPI" checked={inputs.recoverIpi} onChange={(v) => handleInputChange('recoverIpi', v)} />
                   <Checkbox label="ICMS" checked={inputs.recoverIcms} onChange={(v) => handleInputChange('recoverIcms', v)} />
+                  <Checkbox label="Frete Rodov. (PIS/COFINS)" checked={inputs.recoverRoadFreightTax} onChange={(v) => handleInputChange('recoverRoadFreightTax', v)} />
                 </div>
               </div>
             </section>
@@ -267,6 +268,7 @@ Total Impostos: ${formatCurrency(results.totalTaxes)}
                 <InputGroup label="Armazenagem (R$)" value={results.finalStorage} onChange={() => {}} prefix="R$" readOnly />
                 <InputGroup label="Levantes" value={inputs.lifting} onChange={(v) => handleInputChange('lifting', v)} prefix="R$" isManual />
                 <InputGroup label="Pesagem Container" value={inputs.weighing} onChange={(v) => handleInputChange('weighing', v)} prefix="R$" isManual />
+                <InputGroup label="Frete Rodoviário" value={inputs.roadFreight} onChange={(v) => handleInputChange('roadFreight', v)} prefix="R$" isManual />
                 <InputGroup label="Outras Despesas" value={inputs.otherExpenses} onChange={(v) => handleInputChange('otherExpenses', v)} prefix="R$" isManual />
               </div>
             </section>
@@ -358,7 +360,8 @@ Total Impostos: ${formatCurrency(results.totalTaxes)}
                 <TableRow label="PIS" value={results.pisValue} total={results.totalImportCost} base={results.pisBase} />
                 <TableRow label="COFINS" value={results.cofinsValue} total={results.totalImportCost} base={results.cofinsBase} />
                 <TableRow label="ICMS" value={results.icmsValue} total={results.totalImportCost} base={results.icmsBase} />
-                <TableRow label="Despesas Operacionais" value={results.totalOperationalExpenses} total={results.totalImportCost} />
+                <TableRow label="Frete Rodoviário" value={inputs.roadFreight} total={results.totalImportCost} />
+                <TableRow label="Despesas Operacionais" value={results.totalOperationalExpenses - inputs.roadFreight} total={results.totalImportCost} />
                 <tr className="bg-gray-50 font-bold">
                   <td className="px-6 py-4 text-sm text-gray-900">TOTAL GERAL</td>
                   <td className="px-6 py-4 text-sm text-gray-900 text-right">-</td>
