@@ -1,7 +1,8 @@
 import { ImportInputs } from "./types";
 
 export const DEFAULT_INPUTS: ImportInputs = {
-  productName: "TP-A55-10B-005",
+  productCode: "TP-A55-10B-005",
+  productDescription: "Lâmpada LED A55 10W",
   ncm: "8539.52.00",
   volume: "40'HQ",
   destination: "Navegantes, SC",
@@ -17,16 +18,16 @@ export const DEFAULT_INPUTS: ImportInputs = {
   ipiRate: 6.50,
   pisRate: 2.10,
   cofinsRate: 9.65,
-  icmsRate: 18.00, // Common rate, image had 0% (deferred)
+  icmsRate: 4.00,
   
-  siscomex: 154.23,
+  siscomex: 250.00,
   thc: 1050.00,
   blRelease: 550.00,
   customsBroker: 1200.00,
   storageRate: 0.23,
-  lifting: 450.00,
-  weighing: 250.00,
-  roadFreight: 1800.00,
+  lifting: 376.00,
+  weighing: 126.00,
+  roadFreight: 10000.00,
   otherExpenses: 559.17,
   
   recoverPis: true,

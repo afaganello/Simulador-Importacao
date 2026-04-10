@@ -36,9 +36,10 @@ export function calculateImportCosts(inputs: ImportInputs): ImportResults {
   // Conversões para BRL
   const valorFobBrl = merchandiseValueUsd * dollarRate;
   const freteInternacionalBrl = internationalFreightUsd * containerQuantity * dollarRate;
-  const seguroBrl = insuranceUsd * dollarRate;
   
   // Valor Aduaneiro (CIF)
+  // Seguro = 0.185% do CIF -> Seguro = (0.00185 * (FOB + Frete)) / (1 - 0.00185)
+  const seguroBrl = (0.00185 * (valorFobBrl + freteInternacionalBrl)) / (1 - 0.00185);
   const valorAduaneiroBrl = valorFobBrl + freteInternacionalBrl + seguroBrl;
 
   // AFRMM (Marinha Mercante) - 8% sobre o frete internacional (Sempre Marítimo agora)
@@ -61,7 +62,11 @@ export function calculateImportCosts(inputs: ImportInputs): ImportResults {
   const cofinsValue = cofinsBase * (cofinsRate / 100);
 
   // Despesas Operacionais
-  const totalOperationalExpenses = siscomex + finalAfrmm + finalStorage + thc + blRelease + customsBroker + lifting + weighing + roadFreight + otherExpenses;
+  const finalThc = thc * containerQuantity;
+  const finalLifting = lifting * containerQuantity;
+  const finalWeighing = weighing * containerQuantity;
+  
+  const totalOperationalExpenses = siscomex + finalAfrmm + finalStorage + finalThc + blRelease + customsBroker + finalLifting + finalWeighing + roadFreight + otherExpenses;
 
   // ICMS (Cálculo "por dentro")
   // Base ICMS = (Valor Aduaneiro + II + IPI + PIS + COFINS + Despesas Aduaneiras) / (1 - Alíquota ICMS)
@@ -115,6 +120,9 @@ export function calculateImportCosts(inputs: ImportInputs): ImportResults {
     totalOperationalExpenses,
     finalAfrmm,
     finalStorage,
+    finalThc,
+    finalLifting,
+    finalWeighing,
     totalImportCost,
     totalRecoverableTaxes,
     netAccountingCost,

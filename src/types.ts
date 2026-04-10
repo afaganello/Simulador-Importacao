@@ -1,6 +1,7 @@
 export interface ImportInputs {
   // Dados da Mercadoria (Identificação)
-  productName: string;
+  productCode: string;
+  productDescription: string;
   ncm: string;
   volume: string;
   destination: string;
@@ -64,6 +65,9 @@ export interface ImportResults {
   totalOperationalExpenses: number;
   finalAfrmm: number;
   finalStorage: number;
+  finalThc: number;
+  finalLifting: number;
+  finalWeighing: number;
   
   // Totais
   totalImportCost: number;
@@ -71,4 +75,33 @@ export interface ImportResults {
   netAccountingCost: number;
   unitAccountingCost: number;
   importFactor: number;
+}
+
+export interface Simulation {
+  id: string;
+  name: string;
+  inputs: ImportInputs;
+}
+
+export interface ClientData {
+  companyName: string;
+  contactPerson: string;
+  email: string;
+  phone: string;
+  address: string;
+}
+
+export interface ProposalData {
+  observations: string;
+  terms: string;
+  signer: string;
+  adjustedQuantities: Record<string, number>; // simulationId -> quantity
+}
+
+export interface Draft {
+  id: string;
+  timestamp: number;
+  clientData: ClientData;
+  proposalData: ProposalData;
+  simulations: Simulation[];
 }

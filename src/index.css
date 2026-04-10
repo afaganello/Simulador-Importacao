@@ -1,1 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+  
+  /* Brand Colors from CETUS Guide */
+  --color-brand-blue: #1E82C1; /* CMYK 80, 40, 0, 0 */
+  --color-brand-dark: #1A1A1A; /* CMYK 0, 0, 0, 90 */
+  --color-brand-gold: #D4AF37; /* Approximate from guide */
+}
+
+@layer base {
+  body {
+    @apply font-sans text-brand-dark bg-[#F8F9FA];
+  }
+}
