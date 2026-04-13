@@ -1369,7 +1369,7 @@ Total Impostos: ${formatCurrency(results.totalTaxes)}
                   return (
                     <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
                       <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Previsão de Custo Final líquido em Estoque</div>
-                      <div className="text-2xl font-black text-brand-blue">
+                      <div className={`font-black text-brand-blue ${formatCurrency(totals.net).length > 15 ? 'text-xl' : 'text-2xl'}`}>
                         {formatCurrency(totals.net)}
                       </div>
                     </div>
@@ -1662,7 +1662,11 @@ Total Impostos: ${formatCurrency(results.totalTaxes)}
                   </div>
                 </div>
                 <div className="mb-8 relative z-10">
-                  <div className="text-7xl font-black mb-1 tracking-tighter">
+                  <div className={`font-black mb-1 tracking-tighter transition-all duration-300 ${
+                    formatCurrency(results.unitAccountingCost).length > 15 ? 'text-4xl' :
+                    formatCurrency(results.unitAccountingCost).length > 12 ? 'text-5xl' :
+                    formatCurrency(results.unitAccountingCost).length > 10 ? 'text-6xl' : 'text-7xl'
+                  }`}>
                     {formatCurrency(results.unitAccountingCost)}
                   </div>
                   <p className="text-blue-200 text-[10px] font-bold uppercase tracking-widest opacity-80">Custo líquido por unidade</p>
@@ -1942,7 +1946,7 @@ function ResultRow({ label, value, bold, isCredit, secondary, tooltip }: {
         {tooltip && <Tooltip text={tooltip} />}
       </span>
       <span className={`
-        ${bold ? 'text-xl font-black text-white' : secondary ? 'text-xs font-bold text-blue-200' : 'text-sm font-bold text-blue-50'}
+        ${bold ? (value.length > 15 ? 'text-base' : 'text-xl') + ' font-black text-white' : secondary ? 'text-xs font-bold text-blue-200' : (value.length > 15 ? 'text-xs' : 'text-sm') + ' font-bold text-blue-50'}
         ${isCredit ? 'text-green-400' : ''}
       `}>
         {isCredit ? `- ${value}` : value}
@@ -2095,7 +2099,7 @@ function BreakdownModal({ isOpen, onClose, results, inputs }: { isOpen: boolean,
               </tr>
               <tr className="bg-brand-blue/5">
                 <td className="py-4 px-3 font-black text-brand-blue text-sm uppercase tracking-tight">Custo Unitário Final</td>
-                <td className="py-4 px-3 font-black text-brand-blue text-right text-lg tracking-tighter">{format(unitFinalCost)}</td>
+                <td className={`py-4 px-3 font-black text-brand-blue text-right tracking-tighter ${format(unitFinalCost).length > 15 ? 'text-sm' : 'text-lg'}`}>{format(unitFinalCost)}</td>
               </tr>
             </tbody>
           </table>
@@ -2116,7 +2120,7 @@ function BreakdownRow({ label, value, isNegative }: { label: string, value: numb
   return (
     <tr className="group hover:bg-gray-50/50 transition-colors">
       <td className="py-4 text-xs text-gray-600 font-semibold">{label}</td>
-      <td className={`py-4 text-right font-bold text-sm tracking-tight ${isNegative ? 'text-green-600' : 'text-gray-900'}`}>
+      <td className={`py-4 text-right font-bold tracking-tight ${format(Math.abs(value)).length > 15 ? 'text-xs' : 'text-sm'} ${isNegative ? 'text-green-600' : 'text-gray-900'}`}>
         {isNegative ? `- ${format(Math.abs(value))}` : format(value)}
       </td>
     </tr>
