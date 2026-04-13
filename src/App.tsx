@@ -46,7 +46,7 @@ export default function App() {
   const [simulations, setSimulations] = useState<Simulation[]>(() => {
     const saved = localStorage.getItem('cetus_simulations');
     return saved ? JSON.parse(saved) : [
-      { id: crypto.randomUUID(), name: 'TP-A55-10B-005', inputs: DEFAULT_INPUTS }
+      { id: crypto.randomUUID(), name: 'NOVO PRODUTO', inputs: DEFAULT_INPUTS }
     ];
   });
   const [activeIndex, setActiveIndex] = useState(() => {
@@ -123,10 +123,21 @@ export default function App() {
   };
 
   const addSimulation = () => {
+    const baseInputs = simulations[activeIndex]?.inputs || DEFAULT_INPUTS;
+    const newName = `NOVO PRODUTO ${simulations.length + 1}`;
+    
     const newSim: Simulation = {
       id: crypto.randomUUID(),
-      name: `NOVO-PRODUTO-${simulations.length + 1}`,
-      inputs: { ...DEFAULT_INPUTS, productCode: `NOVO-PRODUTO-${simulations.length + 1}`, productDescription: '' }
+      name: newName,
+      inputs: { 
+        ...baseInputs, 
+        productCode: newName, 
+        productDescription: '',
+        ncm: '',
+        unitPriceUsd: 0,
+        quantityPerContainer: 0,
+        // We keep containerQuantity, freight, dollar, and taxes from the previous one
+      }
     };
     setSimulations([...simulations, newSim]);
     setActiveIndex(simulations.length);
