@@ -28,7 +28,7 @@ export const DEFAULT_INPUTS: ImportInputs = {
   lifting: 376.00,
   weighing: 126.00,
   roadFreight: 10000.00,
-  otherExpenses: 559.17,
+  otherExpenses: 600.00,
   
   recoverPis: true,
   recoverCofins: true,

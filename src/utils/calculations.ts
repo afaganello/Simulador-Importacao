@@ -46,7 +46,7 @@ export function calculateImportCosts(inputs: ImportInputs): ImportResults {
   const finalAfrmm = freteInternacionalBrl * 0.08;
 
   // Armazenagem - 0.23% sobre o Valor Aduaneiro (CIF)
-  const finalStorage = valorAduaneiroBrl * (storageRate / 100);
+  const finalStorage = valorAduaneiroBrl * (0.23 / 100);
 
   // Impostos Federais
   const iiBase = valorAduaneiroBrl;
@@ -66,7 +66,11 @@ export function calculateImportCosts(inputs: ImportInputs): ImportResults {
   const finalLifting = lifting * containerQuantity;
   const finalWeighing = weighing * containerQuantity;
   
-  const totalOperationalExpenses = siscomex + finalAfrmm + finalStorage + finalThc + blRelease + customsBroker + finalLifting + finalWeighing + roadFreight + otherExpenses;
+  const blReleaseFixed = 550;
+  const customsBrokerFixed = 1200;
+  const otherExpensesFixed = 600;
+
+  const totalOperationalExpenses = siscomex + finalAfrmm + finalStorage + finalThc + blReleaseFixed + customsBrokerFixed + finalLifting + finalWeighing + roadFreight + otherExpensesFixed;
 
   // ICMS (Cálculo "por dentro")
   // Base ICMS = (Valor Aduaneiro + II + IPI + PIS + COFINS + Despesas Aduaneiras) / (1 - Alíquota ICMS)

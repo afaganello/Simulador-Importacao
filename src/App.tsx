@@ -1575,15 +1575,15 @@ Total Impostos: ${formatCurrency(results.totalTaxes)}
                   <InputGroup label="Capatazias / Cont." value={inputs.thc} onChange={(v) => handleInputChange('thc', v)} prefix="R$" />
                   <InputGroup label="Total THC" value={results.finalThc} onChange={() => {}} prefix="R$" readOnly />
                 </div>
-                <InputGroup label="Liberação BL" value={inputs.blRelease} onChange={(v) => handleInputChange('blRelease', v)} prefix="R$" isManual />
-                <InputGroup label="Despachante" value={inputs.customsBroker} onChange={(v) => handleInputChange('customsBroker', v)} prefix="R$" isManual />
+                <InputGroup label="Liberação BL" value={550} onChange={() => {}} prefix="R$" readOnly />
+                <InputGroup label="Despachante" value={1200} onChange={() => {}} prefix="R$" readOnly />
                 <div className="flex flex-col gap-4 col-span-1">
                   <InputGroup 
                     label="Armazenagem (%)" 
-                    value={inputs.storageRate} 
-                    onChange={(v) => handleInputChange('storageRate', v)} 
+                    value={0.23} 
+                    onChange={() => {}} 
                     suffix="%" 
-                    isManual 
+                    readOnly 
                   />
                   <InputGroup 
                     label="Total Armaz." 
@@ -1617,7 +1617,7 @@ Total Impostos: ${formatCurrency(results.totalTaxes)}
                   />
                 </div>
                 <InputGroup label="Frete Rodoviário" value={inputs.roadFreight} onChange={(v) => handleInputChange('roadFreight', v)} prefix="R$" />
-                <InputGroup label="Outras Despesas" value={inputs.otherExpenses} onChange={(v) => handleInputChange('otherExpenses', v)} prefix="R$" isManual />
+                <InputGroup label="Outras Despesas" value={600} onChange={() => {}} prefix="R$" readOnly />
               </div>
             </section>
           </div>
